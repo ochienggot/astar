@@ -31,9 +31,7 @@ public class Location
 
         if (obj instanceof Location) {
             Location other = (Location) obj;
-            if (xCoord == other.xCoord && yCoord == other.yCoord) {
-                return true;
-            }
+            return xCoord == other.xCoord && yCoord == other.yCoord;
         }
         return false;
     }

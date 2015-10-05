@@ -7,11 +7,42 @@
  **/
 public class AStarState
 {
-    // fiels for open and closed waypoints
+    // fields for open and closed waypoints initialization
+    private HashMap<Location, Waypoint> openWaypoints = new Hashmap<>();
+    private HashMap<Location, Waypoint> closeWaypoints = new Hashmap<>();
 
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
 
+    /**
+     * @return the number of waypoints in the collection of open waypoints
+     */
+    public int numOpenWaypoints() {
+        return openWaypoints.size();
+    }
+
+    /**
+     * scans thro' all waypoints in the collection of open waypoints
+     * @return reference to the waypoint with the smallest cost; if
+     * none, return null
+     */
+    public Waypoint getMinOpenWaypoint() {
+        // ToDo
+        float leastCost;
+        Waypoint wp;
+        for (Location openWay : openWaypoints.keySet()) {
+            if (get(openWay).remainingCost + 
+                get(openWay).prevCost < leastCost) {
+                wp = get(openWay);
+                leastCost = get(openWay).remainingCost + get(openWay).prevCost;
+                }
+        }
+
+        return wp;
+    }
+
+
+    }
 
     /**
      * Initialize a new state object for the A* pathfinding algorithm to use.
