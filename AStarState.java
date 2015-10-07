@@ -12,7 +12,7 @@ public class AStarState
 {
     // fields for open and closed waypoints initialization
     private HashMap<Location, Waypoint> openWaypoints = new HashMap<>();
-    private HashMap<Location, Waypoint> closeWaypoints = new HashMap<>();
+    private HashMap<Location, Waypoint> closedWaypoints = new HashMap<>();
 
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
@@ -67,9 +67,20 @@ public class AStarState
     public boolean addOpenWaypoint(Waypoint newWP)
     {
         // TODO:  Implement.
+        Location loc = newWP.getLocation();
+
+        if (openWaypoints.containsKey(loc)) {
+            if (newWP.getPreviousCost() < (openWaypoints.get(loc)).getPreviousCost()) {
+                openWaypoints.put(loc, newWP);
+                return true;
+            }
+        } else {
+            openWaypoints.put(loc, newWP);
+            return true;
+        }
+
         return false;
     }
-
 
     /** Returns the current number of open waypoints. **/
     public int numOpenWaypoints()
@@ -86,6 +97,9 @@ public class AStarState
     public void closeWaypoint(Location loc)
     {
         // TODO:  Implement.
+        Waypoint wp = openWaypoints.get(loc);
+        closedWaypoints.put(loc, wp);
+        openWaypoints.remove(loc);
     }
 
     /**
@@ -95,7 +109,8 @@ public class AStarState
     public boolean isLocationClosed(Location loc)
     {
         // TODO:  Implement.
-        return false;
+        return closedWaypoints.containsKey(loc);
+        //return false;
     }
 }
 

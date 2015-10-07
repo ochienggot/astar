@@ -25,7 +25,7 @@ public class Location
     }
 
     /**
-     * Implementation of equals method
+     * Implementation of equals method to override that defined in Object
      */
     @Override public boolean equals(Object obj) {
 
